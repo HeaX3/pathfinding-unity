@@ -1,0 +1,16 @@
+{
+  "name": "com.heax3.pathfinding-unity",
+  "version": "1.0.0",
+  "displayName": "Pathfinding",
+  "description": "Library containing a standalone pathfinding engine which can run in multiple instances within the same game.",
+  "unity": "2022.3",
+  "unityRelease": "12f1",
+  "documentationUrl": "https://github.com/HeaX3/pathfinding-unity",
+  "licensesUrl": "https://github.com/HeaX3/pathfinding-unity",
+  "keywords": [],
+  "author": {
+    "name": "HeaX3",
+    "email": "heax@moonsama.com",
+    "url": "https://www.moonsama.com"
+  }
+}
