@@ -14,6 +14,8 @@ namespace com.heax3.pathfinding_unity
 
         public List<MapTriangle> LinkedMapTriangles;
 
+        public Vector3 Center;
+
         [SerializeField]
         private Edge ab;
         public Edge AB { get { return ab; } private set { ab = value; } }
@@ -44,6 +46,12 @@ namespace com.heax3.pathfinding_unity
                 Edges.Add(AB);
                 Edges.Add(BC);
                 Edges.Add(CA);
+
+                float centerX = (Vertices[0].x + Vertices[1].x + Vertices[2].x) / 3;
+                float centerY = (Vertices[0].y + Vertices[1].y + Vertices[2].y) / 3;
+                float centerZ = (Vertices[0].z + Vertices[1].z + Vertices[2].z) / 3;
+
+                Center = new Vector3(centerX, centerY, centerZ);
             }
         }
 

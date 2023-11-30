@@ -37,6 +37,7 @@ namespace FunnelAlgorithm
 
         public bool Equals(Edge other)
         {
+           
             return (other.A.Equals(A) && other.B.Equals(B)) || (other.A.Equals(B) && other.B.Equals(A));
         }
     }
