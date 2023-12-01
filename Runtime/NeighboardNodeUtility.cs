@@ -17,7 +17,7 @@ namespace com.heax3.pathfinding_unity
         {
             _graphNodesWithNeighboards.Clear();
 
-            GetVertices(new Vector3(startPath.X, 1, startPath.Y), mapTriangles);
+            GetVertices(new Vector3(startPath.X, startPath.Y, startPath.Z), mapTriangles);
 
 /*            foreach (var v in _graphNodesWithNeighboards)
             {
@@ -36,7 +36,7 @@ namespace com.heax3.pathfinding_unity
         {
          //   int startRoundedX = (int)Math.Round(start.x, MidpointRounding.AwayFromZero);
         //    int startRoundedZ = (int)Math.Round(start.z, MidpointRounding.AwayFromZero);
-            AStarVector2Float startVector2Float = new AStarVector2Float(start.x, start.z);
+            AStarVector2Float startVector2Float = new AStarVector2Float(start.x, start.y, start.z);
 
             List<AStarVector2Float> neighboards = new List<AStarVector2Float>();
 
@@ -53,7 +53,9 @@ namespace com.heax3.pathfinding_unity
                 Vector3 v2 = tr.Vertices[1];
                 Vector3 v3 = tr.Vertices[2];
 
-                if (v1 != start && v2 != start && v3 != start)
+                if (!v1.NearestEqualXZ(start) 
+                    && !v2.NearestEqualXZ(start)
+                    && !v3.NearestEqualXZ(start))
                 {
                     continue;
                 }
@@ -62,7 +64,7 @@ namespace com.heax3.pathfinding_unity
                 {
                  //   int roundedX = (int)Math.Round(v.x, MidpointRounding.AwayFromZero);
                 //    int roundedZ = (int)Math.Round(v.z, MidpointRounding.AwayFromZero);
-                    AStarVector2Float currentVector2Float = new AStarVector2Float(v.x, v.z);
+                    AStarVector2Float currentVector2Float = new AStarVector2Float(v.x, v.y, v.z);
 
                     if (startVector2Float.Equals(currentVector2Float))
                     {               

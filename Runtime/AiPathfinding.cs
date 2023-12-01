@@ -55,9 +55,9 @@ namespace com.heax3.pathfinding_unity
                 anglelineRenderer.SetPosition(1, v1);
                 anglelineRenderer.SetPosition(2, v2);*/
 
-                mapTriangle.AddVertices(new Vector3((float)Math.Round(v0.x, 3), 1f, (float)Math.Round(v0.z, 3)));
-                mapTriangle.AddVertices(new Vector3((float)Math.Round(v1.x, 3), 1f, (float)Math.Round(v1.z, 3)));
-                mapTriangle.AddVertices(new Vector3((float)Math.Round(v2.x, 3), 1f, (float)Math.Round(v2.z, 3)));
+                mapTriangle.AddVertices(new Vector3((float)Math.Round(v0.x, 3), (float)Math.Round(v0.y, 3), (float)Math.Round(v0.z, 3)));
+                mapTriangle.AddVertices(new Vector3((float)Math.Round(v1.x, 3), (float)Math.Round(v1.y, 3), (float)Math.Round(v1.z, 3)));
+                mapTriangle.AddVertices(new Vector3((float)Math.Round(v2.x, 3), (float)Math.Round(v2.y, 3), (float)Math.Round(v2.z, 3)));
 
                 /*                mapTriangle.AddVertices(new Vector3(v0.x, 1f, v0.z));
                                 mapTriangle.AddVertices(new Vector3(v1.x, 1f, v1.z));
@@ -102,8 +102,8 @@ namespace com.heax3.pathfinding_unity
             Vector2 startPathPoint2D = new Vector2(startPathPoint.x, startPathPoint.z);
             Vector2 targetPathPoint2D = new Vector2(targetPathPoint.x, targetPathPoint.z);
 
-            startPathPoint = new Vector3(startPathPoint.x, 1f, startPathPoint.z);
-            targetPathPoint = new Vector3(targetPathPoint.x, 1f, targetPathPoint.z);
+            startPathPoint = new Vector3(startPathPoint.x, startPathPoint.y, startPathPoint.z);
+            targetPathPoint = new Vector3(targetPathPoint.x, targetPathPoint.y, targetPathPoint.z);
 
             MapTriangle startTriangle = GetTriangleByPoint(_triangles, startPathPoint);
 
@@ -149,7 +149,7 @@ namespace com.heax3.pathfinding_unity
             return funnelAlgorithmPath.Positions;
         }
 
-        public Vector3[] CreatePath2(Vector3 startPathPoint, Vector3 targetPathPoint)
+/*        public Vector3[] CreatePath2(Vector3 startPathPoint, Vector3 targetPathPoint)
         {
 
             Vector2 startPathPoint2D = new Vector2(startPathPoint.x, startPathPoint.z);
@@ -198,7 +198,7 @@ namespace com.heax3.pathfinding_unity
 
             return funnelAlgorithmPath.Positions;
         }
-
+*/
 
         private FunnelAlgorithmPath GetClearPath(List<MapTriangle> pathTriangles)
         {
@@ -221,7 +221,7 @@ namespace com.heax3.pathfinding_unity
             foreach (var p in path.Positions)
             {
                 Debug.Log("FINAL PATH =>" + p);
-                anglelineRenderer.SetPosition(i, new Vector3(p.x, 8f, p.z));
+                anglelineRenderer.SetPosition(i, new Vector3(p.x, p.y + 0.4f, p.z));
                 i++;
             }
 
@@ -239,18 +239,18 @@ namespace com.heax3.pathfinding_unity
 
             Debug.Log("PATH POINT COUNT " + path.Count);
 
-            LineRenderer pathLineRenderer = VisualUtil.GeneratePathLine(Color.red);
+/*            LineRenderer pathLineRenderer = VisualUtil.GeneratePathLine(Color.red);
             int i = 0;
             pathLineRenderer.positionCount = path.Count + 1;
 
-            pathLineRenderer.SetPosition(i, new Vector3(target.X, 8f, target.Y));
+            pathLineRenderer.SetPosition(i, new Vector3(target.X, target.Y, target.Z));
 
             foreach (var p in path)
             {
                 i++;
-                pathLineRenderer.SetPosition(i, new Vector3(p.X, 8f, p.Y));
+                pathLineRenderer.SetPosition(i, new Vector3(p.X, p.Y, p.Z));
 
-            }
+            }*/
 
             return path;
         }
@@ -274,7 +274,7 @@ namespace com.heax3.pathfinding_unity
 
           //  int targetRoundedX = (int)Math.Round(minVec.x, MidpointRounding.AwayFromZero);
          //   int targetRoundedZ = (int)Math.Round(minVec.z, MidpointRounding.AwayFromZero);
-            AStarVector2Float target = new AStarVector2Float(minVec.x, minVec.z);
+            AStarVector2Float target = new AStarVector2Float(minVec.x, minVec.y, minVec.z);
 
             return target;
         }

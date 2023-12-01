@@ -11,7 +11,7 @@ namespace com.heax3.pathfinding_unity
             GameObject go = new GameObject();
             LineRenderer trianglelineRenderer = go.AddComponent<LineRenderer>();
             trianglelineRenderer.material = new Material(Shader.Find("Sprites/Default"));
-            trianglelineRenderer.widthMultiplier = 0.1f;
+            trianglelineRenderer.widthMultiplier = 0.3f;
 
             float alpha = 1.0f;
             Gradient gradient = new Gradient();

@@ -33,10 +33,10 @@ namespace com.heax3.pathfinding_unity
 
             foreach (AStarVector2Float p in oppositePath)
             {
-                float roundedX = (float)Math.Round(p.X, 3);
+/*                float roundedX = (float)Math.Round(p.X, 3);
                 float roundedZ = (float)Math.Round(p.Y, 3);
-
-                List<MapTriangle> mapTriangles = triangles.Where(s => s.PointInTriangle(new Vector3(p.X, 1, p.Y))).ToList();
+*/
+                List<MapTriangle> mapTriangles = triangles.Where(s => s.PointInTriangle(new Vector3(p.X, p.Y, p.Z))).ToList();
 
                 allMapTriangles.AddRange(mapTriangles);
             }
@@ -113,17 +113,17 @@ namespace com.heax3.pathfinding_unity
 
             CheckMapTriangle(firstPathElementTriangle, targetTriangle, newPathElement);
 
-            LineRenderer anglelineRenderer = null;
+/*            LineRenderer anglelineRenderer = null;
             foreach (var d in pathTriangles)
             {
                 anglelineRenderer = VisualUtil.GeneratePathLine(Color.red);
                 anglelineRenderer.positionCount = 4;
 
-                anglelineRenderer.SetPosition(0, new Vector3(d.Vertices[0].x, 8f, d.Vertices[0].z));
-                anglelineRenderer.SetPosition(1, new Vector3(d.Vertices[1].x, 8f, d.Vertices[1].z));
-                anglelineRenderer.SetPosition(2, new Vector3(d.Vertices[2].x, 8f, d.Vertices[2].z));
-                anglelineRenderer.SetPosition(3, new Vector3(d.Vertices[0].x, 8f, d.Vertices[0].z));
-            }
+                anglelineRenderer.SetPosition(0, new Vector3(d.Vertices[0].x, d.Vertices[0].y + 0.4f, d.Vertices[0].z));
+                anglelineRenderer.SetPosition(1, new Vector3(d.Vertices[1].x, d.Vertices[1].y + 0.4f, d.Vertices[1].z));
+                anglelineRenderer.SetPosition(2, new Vector3(d.Vertices[2].x, d.Vertices[2].y + 0.4f, d.Vertices[2].z));
+                anglelineRenderer.SetPosition(3, new Vector3(d.Vertices[0].x, d.Vertices[0].y + 0.4f, d.Vertices[0].z));
+            }*/
 
             List<List<MapTriangle>> trianglesArray = new List<List<MapTriangle>>();
             List<MapTriangle> triangleArray = new List<MapTriangle>();

@@ -29,7 +29,7 @@ internal static class AStarNodeExtensions
 
             foreach(var next  in listNeighborads)
             {
-                var currentCost = Math.Sqrt(Math.Pow((next.X - parent.Position.X),2) + Math.Pow((next.Y - parent.Position.Y), 2));
+                var currentCost = Math.Sqrt(Math.Pow((next.X - parent.Position.X),2) + Math.Pow((next.Z - parent.Position.Z), 2));
 
                 _currentNeighbours.Add((next, currentCost));
             }      

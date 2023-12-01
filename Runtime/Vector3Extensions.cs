@@ -13,7 +13,7 @@ namespace com.heax3.pathfinding_unity
             var v1x = Math.Abs(v1.x);
             var v2x = Math.Abs(v2.x);
 
-            return Math.Abs(v1x - v2x) < 0.5f;
+            return Math.Abs(v1x - v2x) < 0.0001f;
         }
 
         public static bool NearestEqualZ(this Vector3 v1, Vector3 v2)
@@ -21,7 +21,12 @@ namespace com.heax3.pathfinding_unity
             var v1z = Math.Abs(v1.z);
             var v2z = Math.Abs(v2.z);
 
-            return Math.Abs(v1z - v2z) < 0.5f;
+            return Math.Abs(v1z - v2z) < 0.0001f;
+        }
+
+        public static bool NearestEqualXZ(this Vector3 v1, Vector3 v2)
+        {
+            return v1.NearestEqualX(v2) && v1.NearestEqualZ(v2);
         }
     }
 }

@@ -36,7 +36,7 @@ namespace com.heax3.pathfinding_unity
         {
             //   int startRoundedX = (int)Math.Round(start.x, MidpointRounding.AwayFromZero);
             //    int startRoundedZ = (int)Math.Round(start.z, MidpointRounding.AwayFromZero);
-            AStarVector2Float startVector2Float = new AStarVector2Float(startTriangle.Center.x, startTriangle.Center.z);
+            AStarVector2Float startVector2Float = new AStarVector2Float(startTriangle.Center.x, startTriangle.Center.y, startTriangle.Center.z);
 
             List<AStarVector2Float> neighboards = new List<AStarVector2Float>();
 
@@ -50,7 +50,7 @@ namespace com.heax3.pathfinding_unity
             foreach (var tr in startTriangle.LinkedMapTriangles)
             {
 
-                AStarVector2Float currentVector2Float = new AStarVector2Float(tr.Center.x, tr.Center.z);
+                AStarVector2Float currentVector2Float = new AStarVector2Float(tr.Center.x, tr.Center.y, tr.Center.z);
 
                 if (startVector2Float.Equals(currentVector2Float))
                 {
