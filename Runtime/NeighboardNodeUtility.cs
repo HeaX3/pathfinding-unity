@@ -13,18 +13,31 @@ namespace com.heax3.pathfinding_unity
     {
        private static Dictionary<AStarVector2Float, List<AStarVector2Float>> _graphNodesWithNeighboards = new Dictionary<AStarVector2Float, List<AStarVector2Float>>();
 
-        public static Dictionary<AStarVector2Float, List<AStarVector2Float>> GetNeighboardNode(AStarVector2Float startPath, List<MapTriangle> mapTriangles)
+        public static Dictionary<AStarVector2Float, List<AStarVector2Float>> GetNeighboardNode(AStarVector2Float startPath,
+            MapTriangle targetTriangle,
+            Vector3 targetPathPoint,
+            List<MapTriangle> mapTriangles)
         {
             _graphNodesWithNeighboards.Clear();
 
             GetVertices(new Vector3(startPath.X, startPath.Y, startPath.Z), mapTriangles);
+
+            foreach(var v in targetTriangle.Vertices)
+            {
+                AStarVector2Float currentVector2Float = new AStarVector2Float(v.x, v.y, v.z);
+
+                if (_graphNodesWithNeighboards.ContainsKey(currentVector2Float))
+                {
+                    _graphNodesWithNeighboards[currentVector2Float].Add(new AStarVector2Float(targetPathPoint.x, targetPathPoint.y, targetPathPoint.z));
+                }
+            }
 
 /*            foreach (var v in _graphNodesWithNeighboards)
             {
                 foreach (var vv in v.Value)
                 {
                     GameObject go = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-                    go.transform.position = new Vector3(vv.X, 1.1f, vv.Y);
+                    go.transform.position = new Vector3(vv.X, vv.Y, vv.Z);
                     go.transform.localScale = go.transform.localScale * 0.8f;
                 }
             }*/

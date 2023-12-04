@@ -131,9 +131,15 @@ namespace com.heax3.pathfinding_unity
 
             Debug.Log("Start Triangle Vertice" + startClosestTriangleVertices);
 
-            var graphNodesWithNeighboards = NeighboardNodeUtility.GetNeighboardNode(startClosestTriangleVertices, _triangles);
+            var graphNodesWithNeighboards = NeighboardNodeUtility.GetNeighboardNode(startClosestTriangleVertices, targetTriangle, targetPathPoint, _triangles);
 
-            IReadOnlyCollection<AStarVector2Float> aStarPath = AStarPathResult(startClosestTriangleVertices, targetClosestTriangleVertices, graphNodesWithNeighboards);
+            var targetPoint2dFloat = new AStarVector2Float(targetPathPoint.x, targetPathPoint.y, targetPathPoint.z);
+
+            IReadOnlyCollection<AStarVector2Float> aStarPath = AStarPathResult(startClosestTriangleVertices, targetPoint2dFloat, graphNodesWithNeighboards);
+
+          //  List<AStarVector2Float> aStarPathModified = new List<AStarVector2Float>(aStarPath);
+
+         //   aStarPathModified.RemoveAt(0);
 
             List<MapTriangle> pathTriangles = NodeMapTriangleUtility.GenerateNodeMapTriangle(
                 _triangles,
@@ -145,6 +151,12 @@ namespace com.heax3.pathfinding_unity
 
             FunnelAlgorithmPath funnelAlgorithmPath = GetClearPath(pathTriangles);
 
+            float dist = 0;
+            for(int i=0; i < funnelAlgorithmPath.Positions.Count()-1; i++)
+            {
+                dist += Vector3.Distance(funnelAlgorithmPath.Positions[i], funnelAlgorithmPath.Positions[i + 1]);
+            }
+            Debug.Log("PATH DISTANCE " + dist);
 
             return funnelAlgorithmPath.Positions;
         }
@@ -264,6 +276,8 @@ namespace com.heax3.pathfinding_unity
                 float curDist = Vector2.Distance(new Vector2(vec.x, vec.z), new Vector2(point.x, point.y));
 
                 curDist += Vector2.Distance(new Vector2(vec.x, vec.z), new Vector2(pointInTargetTriangle.x, pointInTargetTriangle.y));
+
+                Debug.Log("curDist " + vec +" "+ curDist);
 
                 if (curDist < dist)
                 {
