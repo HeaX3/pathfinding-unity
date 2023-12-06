@@ -1,0 +1,17 @@
+{
+    "name": "com.heax3.pathfinding-unity.sample",
+    "rootNamespace": "",
+    "references": [
+        "GUID:223a1a00023c32f43adb81b6fd3f9bc1",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
