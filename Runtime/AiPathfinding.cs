@@ -98,6 +98,7 @@ namespace com.heax3.pathfinding_unity
 
         public Vector3[] CreatePath(Vector3 startPathPoint, Vector3 targetPathPoint)
         {
+            DateTime startD = DateTime.UtcNow;
 
             Vector2 startPathPoint2D = new Vector2(startPathPoint.x, startPathPoint.z);
             Vector2 targetPathPoint2D = new Vector2(targetPathPoint.x, targetPathPoint.z);
@@ -107,11 +108,24 @@ namespace com.heax3.pathfinding_unity
 
             MapTriangle startTriangle = GetTriangleByPoint(_triangles, startPathPoint);
 
+            if (startTriangle == null)
+            {
+                Debug.Log("==> START POINT OUT OF MAP");
+                return Array.Empty<Vector3>();
+            }
+
             Debug.Log("START Triangle " + startTriangle.ToString());
 
             MapTriangle targetTriangle = GetTriangleByPoint(_triangles, targetPathPoint);
 
+            if(targetTriangle == null)
+            {
+                Debug.Log("==> TARGET POINT OUT OF MAP");
+                return Array.Empty<Vector3>();
+            }
+
             Debug.Log("TARGET Triangle " + targetTriangle.ToString());
+
 
             if (startTriangle == targetTriangle)
             {
@@ -123,6 +137,9 @@ namespace com.heax3.pathfinding_unity
                 return new Vector3[2] { startPathPoint, targetPathPoint };
             }
 
+            TimeSpan span = DateTime.UtcNow - startD;
+            Debug.Log($"1GENERATE PATH Total Milliseconds: {span.TotalMilliseconds}");
+
             AStarVector2Float targetClosestTriangleVertices = GetClosestVerticesToPoint(targetTriangle, startPathPoint2D, targetPathPoint2D);
 
             Debug.Log("Target Triangle Vertice" + targetClosestTriangleVertices);
@@ -133,13 +150,16 @@ namespace com.heax3.pathfinding_unity
 
             var graphNodesWithNeighboards = NeighboardNodeUtility.GetNeighboardNode(startClosestTriangleVertices, targetTriangle, targetPathPoint, _triangles);
 
+            
+
             var targetPoint2dFloat = new AStarVector2Float(targetPathPoint.x, targetPathPoint.y, targetPathPoint.z);
 
             IReadOnlyCollection<AStarVector2Float> aStarPath = AStarPathResult(startClosestTriangleVertices, targetPoint2dFloat, graphNodesWithNeighboards);
 
-          //  List<AStarVector2Float> aStarPathModified = new List<AStarVector2Float>(aStarPath);
+            Debug.Log($"2GENERATE PATH Total Milliseconds: {span.TotalMilliseconds}");
+            //  List<AStarVector2Float> aStarPathModified = new List<AStarVector2Float>(aStarPath);
 
-         //   aStarPathModified.RemoveAt(0);
+            //   aStarPathModified.RemoveAt(0);
 
             List<MapTriangle> pathTriangles = NodeMapTriangleUtility.GenerateNodeMapTriangle(
                 _triangles,
@@ -149,7 +169,14 @@ namespace com.heax3.pathfinding_unity
                 targetPathPoint,
                 startPathPoint);
 
+            span = DateTime.UtcNow - startD;
+            Debug.Log($"4GENERATE PATH Total Milliseconds: {span.TotalMilliseconds}");
+
             FunnelAlgorithmPath funnelAlgorithmPath = GetClearPath(pathTriangles);
+
+            span = DateTime.UtcNow - startD;
+            Debug.Log($"5GENERATE PATH Total Milliseconds: {span.TotalMilliseconds}");
+
 
             float dist = 0;
             for(int i=0; i < funnelAlgorithmPath.Positions.Count()-1; i++)
@@ -232,7 +259,7 @@ namespace com.heax3.pathfinding_unity
             int i = 0;
             foreach (var p in path.Positions)
             {
-                Debug.Log("FINAL PATH =>" + p);
+              //  Debug.Log("FINAL PATH =>" + p);
                 anglelineRenderer.SetPosition(i, new Vector3(p.x, p.y + 0.4f, p.z));
                 i++;
             }
