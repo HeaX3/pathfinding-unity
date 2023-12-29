@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 internal readonly struct AStarPathNode : IComparable<AStarPathNode>
 {
     public AStarVector2Float Position { get; }
@@ -15,7 +14,6 @@ internal readonly struct AStarPathNode : IComparable<AStarPathNode>
         TraverseDistance = traverseDistance;
         _heuristicDistance = (position - target).DistanceEstimate();
         _estimatedTotalCost = traverseDistance + _heuristicDistance;
-
     }
 
     public int CompareTo(AStarPathNode other)

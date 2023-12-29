@@ -42,8 +42,6 @@ internal class BinaryHeap<TKey, T> : IBinaryHeap<TKey, T>
             {
                 break;
             }
-                
-
             Swap(i, j);
             i = j;
         }
@@ -87,7 +85,6 @@ internal class BinaryHeap<TKey, T> : IBinaryHeap<TKey, T>
             throw new KeyNotFoundException(nameof(value));
         }
             
-
         _collection[index] = value;
     }
 

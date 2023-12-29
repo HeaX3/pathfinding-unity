@@ -36,12 +36,7 @@ namespace FunnelAlgorithm
             return Vector3.Cross(ray.direction, point - ray.origin).magnitude;
         }
 
-        public static bool SegmentSegmentIntersection(
-            out Vector3 intersectionPoint,
-            Vector3 segment1Start,
-            Vector3 segment1End,
-            Vector3 segment2Start,
-            Vector3 segment2End)
+        public static bool SegmentSegmentIntersection(out Vector3 intersectionPoint, Vector3 segment1Start, Vector3 segment1End, Vector3 segment2Start, Vector3 segment2End)
         {
             Vector3 direction1 = segment1End - segment1Start;
             Vector3 direction2 = segment2End - segment2Start;
@@ -72,12 +67,7 @@ namespace FunnelAlgorithm
             return isIntersect;
         }
 
-        public static bool LineLineIntersection(
-            out Vector3 intersection,
-            Vector3 linePoint1,
-            Vector3 lineVec1,
-            Vector3 linePoint2,
-            Vector3 lineVec2)
+        public static bool LineLineIntersection(out Vector3 intersection, Vector3 linePoint1, Vector3 lineVec1, Vector3 linePoint2, Vector3 lineVec2)
         {
             Vector3 lineVec3 = linePoint2 - linePoint1;
             Vector3 crossVec1and2 = Vector3.Cross(lineVec1, lineVec2);

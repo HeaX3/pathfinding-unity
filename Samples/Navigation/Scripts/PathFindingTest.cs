@@ -5,8 +5,6 @@ using System;
 using System.Linq;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
-using Clipper2Lib;
-using EarClipperLib;
 using FunnelAlgorithm;
 using System.Threading.Tasks;
 using System.Threading;
@@ -32,8 +30,6 @@ namespace com.heax3.pathfinding_unity
 
             _touch.started += OnTouch;
             _touch.Enable();
-
-            Debug.Log("Awake");
         }
         AiPathfinding aiPathfinding;
         void Start()
@@ -46,8 +42,6 @@ namespace com.heax3.pathfinding_unity
 
             TimeSpan span = DateTime.UtcNow - startD;
             Debug.Log($"GENERATE NAV MESH Total Milliseconds {span.TotalMilliseconds}");
-
-            
         }
 
         void OnTouch(InputAction.CallbackContext context)
@@ -60,7 +54,6 @@ namespace com.heax3.pathfinding_unity
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
                 Debug.Log("H I T" + hit.point);
-
                 CreatePathToHitPoint(hit.point);
             }
         }
@@ -68,15 +61,28 @@ namespace com.heax3.pathfinding_unity
 
         private void CreatePathToHitPoint(Vector3 targetInWorld)
         {
-            //     List<GameObject> mapGameObjects = GameObject.FindGameObjectsWithTag("map").ToList();
-
-            //      AiPathfinding aiPathfinding = new AiPathfinding(mapGameObjects);
-
             targetInWorld = new Vector3(targetInWorld.x, targetInWorld.y, targetInWorld.z);
 
             DateTime startD = DateTime.UtcNow;
 
-            aiPathfinding.CreatePath(startPath, targetInWorld);
+            Vector3[] pathPoints = aiPathfinding.CreatePath(startPath, targetInWorld);
+
+            float dist = 0;
+            for (int s = 0; s < pathPoints.Count() - 1; s++)
+            {
+                dist += Vector3.Distance(pathPoints[s], pathPoints[s + 1]);
+            }
+            Debug.Log("PATH DISTANCE " + dist);
+
+            LineRenderer anglelineRenderer = VisualUtil.GeneratePathLine(Color.black);
+            anglelineRenderer.positionCount = pathPoints.Length;
+            int i = 0;
+            foreach (var p in pathPoints)
+            {
+                anglelineRenderer.SetPosition(i, new Vector3(p.x, p.y + 0.4f, p.z));
+                i++;
+            }
+
             TimeSpan span = DateTime.UtcNow - startD;
             Debug.Log($"GENERATE PATH Total Milliseconds: {span.TotalMilliseconds}");
 

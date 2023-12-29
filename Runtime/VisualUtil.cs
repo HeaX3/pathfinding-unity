@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace com.heax3.pathfinding_unity
 {
-    public static class VisualUtil 
+    public static class VisualUtil
     {
         public static LineRenderer GeneratePathLine(Color color)
         {

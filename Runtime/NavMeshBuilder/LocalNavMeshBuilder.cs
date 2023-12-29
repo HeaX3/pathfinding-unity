@@ -7,11 +7,9 @@ using com.heax3.pathfinding_unity;
 
 namespace com.heax3.pathfinding_unity
 {
-    // Build and update a localized navmesh from the sources marked by NavMeshSourceTag
     [DefaultExecutionOrder(-102)]
     public class LocalNavMeshBuilder : MonoBehaviour
     {
-
         public Transform Tracked;
         public Vector3 Size = new Vector3(80.0f, 20.0f, 80.0f);
 
@@ -21,10 +19,8 @@ namespace com.heax3.pathfinding_unity
         List<NavMeshBuildSource> sources = new List<NavMeshBuildSource>();
         public NavMeshTriangulation triangles;
 
-
         public NavMeshTriangulation CollectResourcesForNavMesh(bool cleanNavMeshAfterBuild = false)
         {
-
             navMesh = new NavMeshData();
             instance = UnityEngine.AI.NavMesh.AddNavMeshData(navMesh);
 
@@ -71,7 +67,6 @@ namespace com.heax3.pathfinding_unity
 
         Bounds QuantizedBounds()
         {
-            // Quantize the bounds to update only when theres a 10% change in size
             var center = Tracked ? Tracked.position : transform.position;
             return new Bounds(Quantize(center, 0.1f * Size), Size);
         }

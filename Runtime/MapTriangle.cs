@@ -66,7 +66,6 @@ namespace com.heax3.pathfinding_unity
             Vector3 v2 = Vertices[1];
             Vector3 v3 = Vertices[2];
 
-
             float d1, d2, d3;
             bool has_neg, has_pos;
 

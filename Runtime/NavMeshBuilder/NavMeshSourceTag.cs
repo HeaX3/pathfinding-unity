@@ -8,7 +8,6 @@ namespace com.heax3.pathfinding_unity
     [DefaultExecutionOrder(-200)]
     public class NavMeshSourceTag : MonoBehaviour
     {
-
         public static List<MeshFilter> m_Meshes = new List<MeshFilter>();
         public static List<Terrain> m_Terrains = new List<Terrain>();
 
@@ -42,7 +41,6 @@ namespace com.heax3.pathfinding_unity
             }
         }
 
-        // Collect all the navmesh build sources for enabled objects tagged by this component
         public static void Collect(ref List<NavMeshBuildSource> sources)
         {
             sources.Clear();

@@ -16,9 +16,6 @@ public class AStarPath
         {
             return;
         }
-
-    //    AStarNodeExtensions.GraphNodesWithNeighboards.Clear();
-
         AStarNodeExtensions.GraphNodesWithNeighboards = neighboardNodes;
 
         _frontier = new BinaryHeap<AStarVector2Float, AStarPathNode>(a => a.Position, initialCapacity);
@@ -27,10 +24,7 @@ public class AStarPath
         _links = new Dictionary<AStarVector2Float, AStarVector2Float>(initialCapacity);
     }
 
-    public bool Calculate(AStarVector2Float start,
-        AStarVector2Float target, 
-        IReadOnlyCollection<AStarVector2Float> obstacles, 
-        out IReadOnlyCollection<AStarVector2Float> aStarPath)
+    public bool Calculate(AStarVector2Float start, AStarVector2Float target, IReadOnlyCollection<AStarVector2Float> obstacles, out IReadOnlyCollection<AStarVector2Float> aStarPath)
     {
         if (obstacles == null)
         {
@@ -68,7 +62,7 @@ public class AStarPath
             AStarPathNode current = _frontier.Dequeue();
             _ignoredPositions.Add(current.Position);
 
-            if (current.Position.Equals(target)) 
+            if (current.Position.Equals(target))
                 return true;
 
             GenerateFrontierNodes(current, target);
@@ -87,7 +81,7 @@ public class AStarPath
             {
                 continue;
             }
-                
+
             if (!_frontier.TryGet(newNode.Position, out AStarPathNode existingNode))
             {
                 _frontier.Enqueue(newNode);
