@@ -5,10 +5,6 @@ using System;
 using System.Linq;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.EnhancedTouch;
-using FunnelAlgorithm;
-using System.Threading.Tasks;
-using System.Threading;
-using com.heax3.pathfinding_unity;
 
 namespace com.heax3.pathfinding_unity
 {
